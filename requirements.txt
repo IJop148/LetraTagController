@@ -1,0 +1,3 @@
+dymo-bluetooth
+python-barcode
+flask[async]

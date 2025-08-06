@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DYMO Label Printer</title>
+    <style>
+        .flash-message {
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            background-color: #f2f2f2;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div id="flash-container" class="flash-message">
+          {{ messages[0] }}
+        </div>
+        <script>
+          setTimeout(function() {
+            var flashContainer = document.getElementById('flash-container');
+            if (flashContainer) {
+              flashContainer.style.display = 'none';
+            }
+          }, 3000); // Hide after 3 seconds
+        </script>
+      {% endif %}
+    {% endwith %}
+
+    <h1>Print a Label</h1>
+    <form action="/print" method="post">
+        <label for="text">Text to print:</label><br>
+        <input type="text" id="text" name="text"><br><br>
+        <label for="type">Print as:</label><br>
+        <input type="radio" id="barcode" name="type" value="barcode">
+        <label for="barcode">Barcode</label><br>
+        <input type="radio" id="text_radio" name="type" value="text" checked>
+        <label for="text_radio">Text</label><br><br>
+        <input type="submit" value="Print">
+    </form>
+</body>
+</html>
