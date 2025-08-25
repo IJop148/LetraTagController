@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, get_flashed_messages
 import asyncio
 from app.__main__ import generate_and_print_barcode, print_text
+from random import randbytes
 
 app = Flask(__name__)
+app.secret_key = randbytes(5).hex()
 
 @app.route('/')
 def index():
